@@ -1,3 +1,4 @@
+//app.js
 import express from "express";
 import handlebars from "express-handlebars";
 import { Server } from "socket.io";
@@ -6,6 +7,7 @@ import mongosePaginate from "mongoose-paginate-v2";
 import websocket from "../websocket.js";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
+dotenv.config();
 
 
 import bodyParser from "body-parser";
@@ -17,11 +19,15 @@ import errorHandler from "../src/middlewares/errorHandler.js";
 
 const app = express();
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true}));
 
 app.use(bodyParser.json());
-app.use("/api/products", productRoutes);
-app.use("/api/monckingproducts", mockRoutes);
-app.use("/monckingproducts", mockRoutes);
+app.use('/', productRoutes);
+app.use('/api/products', productRoutes);
+app.use('/api', mockRoutes);
+app.use('/api/monckingproducts', mockRoutes);
+app.use('/monckingproducts', mockRoutes);
 app.use(errorHandler);
 
 const conexion = async() =>{

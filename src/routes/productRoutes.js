@@ -1,22 +1,15 @@
-import { Router } from "express";
-import ProductController from "../controllers/productController.js";
-import { uploader } from "../utils/multerUtil.js";
-import validationMiddleware from "../middlewares/validationMiddleware.js";
-import { getMockProducts } from "../controllers/mockController.js";
+import express from 'express';
+import ProductController from '../controllers/productController.js';
+import { uploader } from '../utils/multerUtil.js';
+import validationMiddleware from '../middlewares/validationMiddleware.js';
+import { generateMockProducts } from '../utils/mockingUtils.js';
 
-const router = Router();
-
+const router = express.Router();
 const products = new ProductController();
 
-
-
-router.post('/', uploader.array('thumbnails', 3), async (req, res) => {
-
+router.post('/mockingproducts', uploader.array('thumbnails', 3), async (req, res, next) => {
     if (req.files) {
-        req.body.thumbnails = [];
-        req.files.forEach((file) => {
-            req.body.thumbnails.push(file.filename);
-        });
+        req.body.thumbnails = req.files.map(file => file.filename);
     }
 
     try {
@@ -26,24 +19,21 @@ router.post('/', uploader.array('thumbnails', 3), async (req, res) => {
             payload: result
         });
     } catch (error) {
-        res.status(400).send({
-            status: 'error',
-            message: error.message
+        next(error); // Usar next para manejar el error
+    }
+});
+
+router.get('/mockingproducts', (req, res, next) => {
+    try {
+        const products = generateMockProducts(50);
+        res.send({
+            status: 'success',
+            payload: products
         });
+    } catch (error) {
+        next(error); // Usar next para manejar el error
     }
 });
-
-
-router.get('/mockingproducts', (req, res) =>{
-    const products = [];
-    for (let i = 0; i < 50; i++) {
-        products.push(getMockProducts());
-    }
-    res.send({
-        status: 'success',
-        payload: users 
-    })
-});
-
 
 export default router;
+

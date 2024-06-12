@@ -1,3 +1,5 @@
+//productRepository.js
+
 import ProductDao from "../dao/productDao.js";
 
 class ProductRepository {

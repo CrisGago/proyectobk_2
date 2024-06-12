@@ -1,3 +1,5 @@
+//productController.js
+
 import ProductService from "../services/productService.js";
 
 export default class ProductController{

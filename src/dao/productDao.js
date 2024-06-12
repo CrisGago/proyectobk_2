@@ -1,3 +1,5 @@
+//productDao.js
+
 import productModel from '../models/productModel.js';
 
 export default class ProductDao {
