@@ -15,7 +15,6 @@ class ProductRepository {
         return await this.productDao.getAll();
     }
 
-    // Otros métodos según sea necesario
-}
+};
 
 export default ProductRepository;
