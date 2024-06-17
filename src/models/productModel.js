@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import mongoosePaginate from 'mongoose-paginate-v2';
 
 
-const productCollection = "mockingproducts";
+const productCollection = "products";
 
 const productSchema = mongoose.Schema({
     title: {

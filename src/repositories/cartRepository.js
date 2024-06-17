@@ -10,7 +10,7 @@ class CartRepository {
     async getCarts() {
         try {
             const carts = await this.dao.getCarts();
-            return carts.map(cart => new CartDto(cart));
+            return carts.map(cart => new cartDao(cart));
         } catch (error) {
             throw new Error(`No Products found in this cart`);
         }
@@ -37,7 +37,7 @@ class CartRepository {
     async addProduct(cart, product, user) {
         try {
             const newProduct = this.dao.addProduct(cart, product, user);
-            return new CartDto(newProduct);
+            return new carts (newProduct);
         } catch (error) {
             throw new Error(`Could not add Product to Cart`);
         }

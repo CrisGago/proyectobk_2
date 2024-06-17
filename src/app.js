@@ -3,7 +3,6 @@ import express from "express";
 import handlebars from "express-handlebars";
 import { Server } from "socket.io";
 import mongoose from "mongoose";
-import mongosePaginate from "mongoose-paginate-v2";
 import websocket from "../websocket.js";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
@@ -13,7 +12,7 @@ dotenv.config();
 import bodyParser from "body-parser";
 import productRoutes from "../src/routes/productRoutes.js";
 import mockRoutes from "../src/routes/mockRoutes.js";
-import errorHandler from "../src/middlewares/errorHandler.js";
+
 
 
 
@@ -24,11 +23,24 @@ app.use(express.urlencoded({ extended: true}));
 
 app.use(bodyParser.json());
 app.use('/', productRoutes);
+app.use('/products', productRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api', mockRoutes);
 app.use('/api/monckingproducts', mockRoutes);
 app.use('/monckingproducts', mockRoutes);
-app.use(errorHandler);
+
+//Middleware
+//app.use((err, req, res, next) =>{
+  //Log del error para debug interno  
+    //console.error(err);
+  //Respuesta de error clase
+    // res.status(500).json({
+    //     status: 'error',
+    //     message: err.message,
+    //     code: err.code || 500,
+    //     cuase: err.cuase || 'causa desconocida'
+   // });
+//});
 
 const conexion = async () => {
     try {

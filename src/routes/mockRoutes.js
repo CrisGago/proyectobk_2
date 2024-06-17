@@ -7,6 +7,7 @@ import { generateMockProduct } from "../utils/mockingUtils.js";
 
 const router = Router();
 
+
 router.get('/', (req, res) =>{
     const products = [];
     for (let i = 0; i < 50; i++) {
