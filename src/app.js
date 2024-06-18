@@ -30,17 +30,17 @@ app.use('/api/monckingproducts', mockRoutes);
 app.use('/monckingproducts', mockRoutes);
 
 //Middleware
-//app.use((err, req, res, next) =>{
-  //Log del error para debug interno  
-    //console.error(err);
+app.use((err, req, res, next) =>{
+   //Log del error para debug interno  
+    console.error(err);
   //Respuesta de error clase
-    // res.status(500).json({
-    //     status: 'error',
-    //     message: err.message,
-    //     code: err.code || 500,
-    //     cuase: err.cuase || 'causa desconocida'
-   // });
-//});
+     res.status(500).json({
+        status: 'error',
+        message: err.message,
+        code: err.code || 500,
+        cuase: err.cuase || 'causa desconocida'
+    });
+});
 
 const conexion = async () => {
     try {

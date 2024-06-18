@@ -1,6 +1,6 @@
 import express from "express";
 import CustomError from "../utils/errors/CustomError.js";
-import { ErrorCodes } from "../utils/errors/enums.js";
+import  ErrorCodes  from "../utils/errors/enums.js";
 import { generateProductErrorInfo } from "../utils/errors/errorDictionary.js";
 import productModel from "../models/productModel.js";
 import ProductController from '../controllers/productController.js';
@@ -25,7 +25,7 @@ router.post('/', async (req, res, next) => {
                 code: ErrorCodes.INVALID_TYPES_ERROR
             });
         } catch (err) {
-            return next(err); // Pasa el error al middleware de manejo de errores
+            return next(err);
         }
     }
     try {
