@@ -11,6 +11,8 @@ dotenv.config();
 
 import bodyParser from "body-parser";
 import productRoutes from "../src/routes/productRoutes.js";
+import cartsRouter from "./routes/carts.router.js";
+import viewsRouter from "./routes/views.Router.js";
 import mockRoutes from "../src/routes/mockRoutes.js";
 
 
@@ -25,6 +27,8 @@ app.use(bodyParser.json());
 app.use('/', productRoutes);
 app.use('/products', productRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/carts', cartsRouter);
+app.use('/carts', viewsRouter);
 app.use('/api', mockRoutes);
 app.use('/api/monckingproducts', mockRoutes);
 app.use('/monckingproducts', mockRoutes);

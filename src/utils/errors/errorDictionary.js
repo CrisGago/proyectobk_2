@@ -12,3 +12,10 @@ export const generateProductErrorInfo = (product) => {
     * category   : needs to be a String, received ${product.category}`
 };
 
+export const generateCartErrorInfo = (cart) => {
+    const { product, quantity } = cart;
+    return `Uno o mas propiedades estan incompletas o no son validas.
+    Lista de propiedades:
+    * product      : needs to be a String, received ${cart.product}
+    * quantity      : needs to be a Number, received ${cart.quantity}`
+};
